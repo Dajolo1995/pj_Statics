@@ -1,0 +1,273 @@
+/* ═══════════════════════════════════════════════════════
+   FairSplit — Layout Styles
+   
+   Uses !important on sidebar menu items because antd's
+   Menu component injects inline styles via cssinjs that
+   override normal CSS specificity. This is the standard
+   way to customize antd dark menus.
+   ═══════════════════════════════════════════════════════ */
+
+/* ──────────────────────────────
+   SIDER
+   ────────────────────────────── */
+/* ──────────────────────────────
+   SIDER (CLARO)
+   ────────────────────────────── */
+.fs-sider {
+  background: #f8fafc !important;
+  border-right: 1px solid #e6e8eb;
+}
+
+.fs-sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc !important;
+}
+
+/* ── Logo ── */
+.fs-logo {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fs-logo__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #003b73;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fs-logo__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.fs-logo__subtitle {
+  font-size: 11px;
+  color: #64748b;
+  letter-spacing: 1px;
+}
+
+/* ── Menu ── */
+.fs-menu {
+  background: transparent !important;
+  border-inline-end: none !important;
+  padding: 0 8px;
+}
+
+/* Items */
+.fs-menu .ant-menu-item {
+  height: 44px !important;
+  line-height: 44px !important;
+  border-radius: 10px !important;
+  color: #64748b !important;
+  font-weight: 500 !important;
+}
+
+/* Icons */
+.fs-menu .ant-menu-item .anticon {
+  color: #94a3b8 !important;
+  font-size: 16px !important;
+}
+
+/* Hover */
+.fs-menu .ant-menu-item:hover {
+  background: #eef2f7 !important;
+  color: #0f172a !important;
+}
+
+.fs-menu .ant-menu-item:hover .anticon {
+  color: #0f172a !important;
+}
+
+/* Selected */
+.fs-menu .ant-menu-item-selected {
+  background: #e6edf5 !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  position: relative;
+}
+
+/* Icon selected */
+.fs-menu .ant-menu-item-selected .anticon {
+  color: #0f172a !important;
+}
+
+/* Barra derecha (como la imagen) */
+.fs-menu .ant-menu-item-selected::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 8px;
+  width: 4px;
+  height: 70%;
+  background: #003b73;
+  border-radius: 4px 0 0 4px;
+}
+
+/* Quitar flecha default */
+.fs-menu .ant-menu-item::after {
+  display: none !important;
+}
+
+/* ── Version ── */
+.fs-version {
+  margin-top: auto;
+  padding: 16px;
+}
+
+.fs-version__badge {
+  font-size: 11px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* ──────────────────────────────
+   HEADER
+   ────────────────────────────── */
+.fs-header {
+  padding: 0 24px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  border-bottom: 1px solid #eceef1;
+  height: 56px !important;
+  line-height: 56px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+/* Tabs */
+.fs-header__tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 100%;
+}
+
+.fs-header__tab {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.3);
+  padding: 0 16px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.2s;
+  border-bottom: 2px solid transparent;
+  position: relative;
+}
+
+.fs-header__tab:hover {
+  color: #003b73;
+}
+
+.fs-header__tab--active {
+  color: #003b73;
+  font-weight: 600;
+  border-bottom-color: #003b73;
+}
+
+/* Actions */
+.fs-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fs-header__search {
+  width: 200px;
+  border-radius: 8px !important;
+  background: #f0f2f5 !important;
+  border: none !important;
+}
+
+.fs-header__search:hover,
+.fs-header__search:focus-within {
+  background: #e8eaed !important;
+}
+
+.fs-header__search .ant-input {
+  background: transparent !important;
+}
+
+.fs-header__icon-btn {
+  color: #71757c !important;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fs-header__icon-btn:hover {
+  color: #003b73 !important;
+  background: rgba(0, 59, 115, 0.05) !important;
+}
+
+.fs-header__export {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  height: 36px !important;
+}
+
+.fs-header__avatar {
+  background: #008080 !important;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s;
+}
+
+.fs-header__avatar:hover {
+  transform: scale(1.05);
+}
+
+/* ──────────────────────────────
+   CONTENT
+   ────────────────────────────── */
+.fs-content {
+  margin: 0 !important;
+  padding: 24px !important;
+  background: #f0f2f5 !important;
+  min-height: calc(100vh - 56px - 48px) !important;
+}
+
+/* ──────────────────────────────
+   FOOTER
+   ────────────────────────────── */
+.fs-footer {
+  text-align: center !important;
+  background: #f0f2f5 !important;
+  border-top: 1px solid #e6e8eb;
+  padding: 12px 24px !important;
+  font-size: 12px !important;
+  color: #71757c !important;
+}
+
+/* ──────────────────────────────
+   SCROLLBAR
+   ────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.18);
+}

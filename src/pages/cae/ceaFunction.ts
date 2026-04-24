@@ -48,6 +48,46 @@ const setCEAResult = (result: CEAResult): void => {
 
 const sleep = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
+
+/**
+ * Ejecuta el algoritmo CEA (Constrained Equal Awards) de forma asíncrona,
+ * emitiendo el progreso paso a paso mediante un `AsyncGenerator`.
+ *
+ * ### Fuente de datos
+ * Lee directamente desde `localStorage`:
+ * - `"claims"`: `Array<{ id: number; quantity: number; stateId: number[] }>`
+ *   Lista de reclamantes con su reclamación (`quantity`) y los estados a los que tienen acceso (`stateId`).
+ * - `"states"`: `Array<{ id: number; quantity: number }>`
+ *   Lista de estados con su capacidad disponible (`quantity`).
+ * 
+ * ### Lógica por iteración
+ * En cada step, W se calcula como el **mínimo** entre:
+ * 1. Para cada estado activo: `capacidad_del_estado / número_de_reclamantes_activos_que_lo_usan`
+ *    → garantiza que ningún estado se sobrepase.
+ * 2. El menor residuo pendiente entre todos los reclamantes activos
+ *    → garantiza que ningún reclamante recibe más de lo que reclamó.
+ *
+ * Ese W se distribuye equitativamente. Luego:
+ * - Se descuenta W de cada estado por cada reclamante que lo usa.
+ * - Los estados que llegan a 0 se marcan como `exhaustedStates`.
+ * - Los reclamantes vinculados a al menos un estado agotado salen como `exitingClaimants`.
+ *
+ * ### Uso con `for await...of`
+ * ```ts
+ * for await (const event of runCEAAsync()) {
+ *   if (!event.done) {
+ *     console.log(`Step ${event.stepNumber}:`, event.currentStep);
+ *   } else {
+ *     console.log("Resultado final:", event.result);
+ *   }
+ * }
+ * ```
+ *
+ * @yields `CEAProgress` en cada step completado (con `done: false`).
+ * @yields `CEADone` al finalizar el algoritmo (con `done: true`).
+ * @throws Error si no existen `"claims"` o `"states"` en localStorage.
+ */
+
 export async function* runCEAAsync(): AsyncGenerator<CEAProgress | CEADone> {
   const claimantsRaw = localStorage.getItem("claims");
   const statesRaw = localStorage.getItem("states");
